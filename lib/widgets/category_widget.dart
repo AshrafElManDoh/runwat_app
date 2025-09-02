@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:runway_app/cubits/home_cubit/home_cubit.dart';
+import 'package:runway_app/views/category_view.dart';
 import 'package:runway_app/widgets/category_item.dart';
 
 class CategoryWidget extends StatelessWidget {
@@ -36,7 +37,18 @@ class CategoryWidget extends StatelessWidget {
                 cubit.category.length,
                 (index) => Padding(
                   padding: const EdgeInsets.only(right: 16),
-                  child: CategoryItem(categoryModel: cubit.category[index]),
+                  child: GestureDetector(
+                    onTap: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) =>
+                              CategoryView(title: cubit.category[index].name),
+                        ),
+                      );
+                    },
+                    child: CategoryItem(categoryModel: cubit.category[index]),
+                  ),
                 ),
               ),
             ),

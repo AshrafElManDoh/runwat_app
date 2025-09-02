@@ -38,7 +38,7 @@ class HomeCubit extends Cubit<HomeState> {
     controller = VideoPlayerController.asset("assets/video/video.mp4")
       ..initialize().then((_) {
         controller
-          ..setLooping(true)
+          ..setLooping(false)
           ..play();
 
         emit(HomeVideo());

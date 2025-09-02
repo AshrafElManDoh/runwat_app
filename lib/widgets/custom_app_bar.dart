@@ -7,9 +7,12 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
     required this.title,
     required this.leadingIconPath,
     required this.trailingIconPath,
+    this.onPressedLeading,
+    this.onPressedtrailing,
   });
   final String title;
   final String leadingIconPath, trailingIconPath;
+  final void Function()? onPressedLeading, onPressedtrailing;
 
   @override
   Size get preferredSize => Size.fromHeight(60);
@@ -24,12 +27,12 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
       forceMaterialTransparency: true,
       centerTitle: true,
       leading: IconButton(
-        onPressed: () {},
+        onPressed: onPressedLeading,
         icon: SvgPicture.asset(leadingIconPath),
       ),
       actions: [
         IconButton(
-          onPressed: () {},
+          onPressed: onPressedtrailing,
           icon: SvgPicture.asset(trailingIconPath),
         ),
       ],

@@ -38,7 +38,6 @@ class HomeBody extends StatelessWidget {
     return BlocBuilder<HomeCubit, HomeState>(
       builder: (context, state) {
         final cubit = context.read<HomeCubit>();
-
         return SlidingUpPanel(
           minHeight: 180,
           maxHeight: MediaQuery.of(context).size.height * 0.7,
