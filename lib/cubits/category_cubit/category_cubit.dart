@@ -24,7 +24,7 @@ class CategoryCubit extends Cubit<CategoryState> {
       image: "assets/images/models/model3.png",
     ),
     ProductModel(
-      title: "Gray coat and white T-sh..",
+      title: "Gray coat and white T-shirt",
       price: "100",
       image: "assets/images/models/model4.png",
     ),
@@ -34,7 +34,7 @@ class CategoryCubit extends Cubit<CategoryState> {
       image: "assets/images/models/model1.png",
     ),
     ProductModel(
-      title: "Top man black with Trous..",
+      title: "Top man black with Trousers",
       price: "50",
       image: "assets/images/models/model2.png",
     ),

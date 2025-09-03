@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:like_button/like_button.dart';
 import 'package:runway_app/cubits/category_cubit/category_cubit.dart';
 import 'package:runway_app/models/product_model.dart';
+import 'package:runway_app/views/product_view.dart';
 import 'package:runway_app/widgets/category_filter.dart';
 import 'package:runway_app/widgets/custom_app_bar.dart';
 import 'package:runway_app/widgets/custom_model_container.dart';
@@ -23,15 +24,15 @@ class CategoryView extends StatelessWidget {
       ),
       body: BlocProvider(
         create: (context) => CategoryCubit(),
-        child: CategoryBody(),
+        child: CategoryBody(title: title),
       ),
     );
   }
 }
 
 class CategoryBody extends StatelessWidget {
-  const CategoryBody({super.key});
-
+  const CategoryBody({super.key, required this.title});
+  final String title;
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -48,8 +49,23 @@ class CategoryBody extends StatelessWidget {
                 mainAxisSpacing: 6,
                 childAspectRatio: 0.72,
               ),
-              itemBuilder: (context, index) => ModelItem(
-                productModel: context.read<CategoryCubit>().products[index],
+              itemBuilder: (context, index) => GestureDetector(
+                onTap: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (_) => ProductView(
+                        title: title,
+                        productModel: context
+                            .read<CategoryCubit>()
+                            .products[index],
+                      ),
+                    ),
+                  );
+                },
+                child: ModelItem(
+                  productModel: context.read<CategoryCubit>().products[index],
+                ),
               ),
             ),
           ),
@@ -72,6 +88,8 @@ class ModelItem extends StatelessWidget {
         Text(
           productModel.title,
           style: TextStyle(fontSize: 14, fontWeight: FontWeight.w500),
+          maxLines: 1,
+          overflow: TextOverflow.ellipsis,
         ),
         SizedBox(height: 6),
         Row(
@@ -79,7 +97,6 @@ class ModelItem extends StatelessWidget {
           children: [
             Text(
               "₤${productModel.price}",
-              maxLines: 1,
               style: TextStyle(fontSize: 16, fontWeight: FontWeight.w600),
             ),
             LikeButton(

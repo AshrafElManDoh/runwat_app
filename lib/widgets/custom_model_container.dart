@@ -27,3 +27,30 @@ class CustomModelContainer extends StatelessWidget {
     );
   }
 }
+
+
+class CustomModelWithoutBackground extends StatelessWidget {
+  const CustomModelWithoutBackground({super.key, required this.imagePath});
+  final String imagePath;
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      padding: EdgeInsets.all(10),
+      decoration: BoxDecoration(
+        color: Colors.white54,
+        borderRadius: BorderRadius.circular(6),
+      ),
+      child: Stack(
+        children: [
+          Positioned(
+            bottom: -20,
+            right: 10,
+            left: 10,
+            child: Image.asset("assets/images/shadow.png",width: 200,),
+          ),
+          Center(child: Image.asset(imagePath)),
+        ],
+      ),
+    );
+  }
+}
